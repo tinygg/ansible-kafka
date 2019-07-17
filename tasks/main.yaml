@@ -28,6 +28,16 @@
   tags:
     - kafka_download
 
+- name: Cleanup required directories
+  file:
+    path： '{{ item }}'
+    state: absent
+  with_items:
+    - '{{ kafka_root_dir }}'
+    - '{{ kafka_log_dirs }}'
+  tags:
+    - kafka_cleanup
+
 - name: Creating required directories
   file:
     path: '{{ item }}'
@@ -36,7 +46,18 @@
     owner: '{{ kafka_user }}'
   with_items:
     - '{{ kafka_root_dir }}'
+    - '{{ kafka_install_dir }}'
     - '{{ kafka_log_dirs }}'
+  tags:
+    - kafka_dirs
+
+- name: Create symlink to kafka installation directory
+  file:
+    src: '{{ kafka_install_dir }}'
+    dest: '{{ kafka_dir }}'
+    state: link
+    group: '{{ kafka_group }}'
+    owner: '{{ kafka_user }}'
   tags:
     - kafka_dirs
 
@@ -50,16 +71,6 @@
   when: dir.stat.exists == False
   tags:
     - kafka_unpack
-
-- name: Create symlink to kafka installation directory
-  file:
-    src: '{{ kafka_install_dir }}'
-    dest: '{{ kafka_dir }}'
-    state: link
-    group: '{{ kafka_group }}'
-    owner: '{{ kafka_user }}'
-  tags:
-    - kafka_dirs
 
 #- name: Create directory for symlink to kafka configuration files
 #  file:
@@ -194,9 +205,9 @@
   tags:
     - kafka_service
 
-#- name: Delete the kafka archive file
-#  file:
-#    path: /tmp/kafka_{{ kafka_version }}.tgz
-#    state: absent
-#  tags:
-#    - kafka_cleanup
+- name: Delete the kafka archive file
+  file:
+    path: /tmp/kafka_{{ kafka_version }}.tgz
+    state: absent
+  tags:
+    - kafka_cleanup

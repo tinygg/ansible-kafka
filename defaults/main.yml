@@ -15,6 +15,8 @@ kafka_group: kafka
 kafka_root_dir: '/usr/lib/kafka'
 kafka_install_dir: '{{ kafka_root_dir }}/kafka_{{ kafka_version_spark_prefix }}-{{ kafka_version }}'
 kafka_dir: '{{ kafka_root_dir }}/kafka'
+# A comma seperated list of directories under which to store log files
+kafka_log_dirs: '{{ kafka_install_dir }}/logs'
 
 ############################# Server #############################
 
@@ -51,9 +53,6 @@ kafka_socket_send_buffer_bytes: 102400
 kafka_socket_receive_buffer_bytes: 102400
 # The maximum size of a request that the socket server will accept (protection against OOM)
 kafka_socket_request_max_bytes: 104857600
-
-# A comma seperated list of directories under which to store log files
-kafka_log_dirs: '{{ kafka_root_dir }}/kafka/logs'
 
 # The default number of log partitions per topic. More partitions allow greater
 # parallelism for consumption, but this will also result in more files across
