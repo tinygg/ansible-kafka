@@ -12,7 +12,8 @@ kafka_download_url: "https://mirrors.huaweicloud.com/apache/kafka/{{ kafka_versi
 kafka_user: kafka
 kafka_group: kafka
 
-kafka_root_dir: /usr/lib
+kafka_root_dir: '/usr/lib/kafka'
+kafka_install_dir: '{{ kafka_root_dir }}/kafka_{{ kafka_version_spark_prefix }}-{{ kafka_version }}'
 kafka_dir: '{{ kafka_root_dir }}/kafka'
 
 ############################# Server #############################

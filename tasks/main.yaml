@@ -53,7 +53,7 @@
 
 - name: Create symlink to kafka installation directory
   file:
-    src: '{{ kafka_root_dir }}/kafka_{{ kafka_version_spark_prefix }}-{{ kafka_version }}'
+    src: '{{ kafka_install_dir }}'
     dest: '{{ kafka_dir }}'
     state: link
     group: '{{ kafka_group }}'
