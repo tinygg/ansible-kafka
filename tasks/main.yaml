@@ -193,7 +193,7 @@
     dest: /etc/systemd/system/kafka.service
   notify:
     - Reload systemd
-    - Restart kafka service
+#    - Restart kafka service
   tags:
     - kafka_service
 

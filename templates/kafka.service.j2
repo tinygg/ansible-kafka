@@ -7,7 +7,7 @@ After=network.target
 [Service]
 Type=simple
 SuccessExitStatus=143
-ExecStart={{ kafka_dir }}/bin/kafka-server-start.sh /u1/kafka/config/server.properties
+ExecStart={{ kafka_dir }}/bin/kafka-server-start.sh {{ kafka_dir }}/config/server.properties
 ExecStop={{ kafka_dir }}/bin/kafka-server-stop.sh
 User={{ kafka_user }}
 Group={{ kafka_group }}
