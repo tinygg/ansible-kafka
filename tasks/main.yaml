@@ -15,16 +15,16 @@
   tags:
     - kafka_user
 
-- name: Check if Kafka has already been downloaded and unpacked
+- name: Check if Kafka has already been downloaded
   stat:
-    path: '{{ kafka_dir }}'
-  register: dir
+    path: '/tmp/kafka_{{ kafka_version_spark_prefix }}-{{ kafka_version }}.tgz'
+  register: tmp_zip
 
 - name: Download kafka
   get_url:
     url: '{{ kafka_download_url }}'
     dest: /tmp
-  when: dir.stat.exists == False
+  when: tmp_zip.stat.exists == False
   tags:
     - kafka_download
 
@@ -69,7 +69,6 @@
     copy: no
     group: '{{ kafka_group }}'
     owner: '{{ kafka_user }}'
-  when: dir.stat.exists == False
   tags:
     - kafka_unpack
 
