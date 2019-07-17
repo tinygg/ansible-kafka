@@ -20,13 +20,13 @@
 # format: host1:port1,host2:port2 ...
 #bootstrap.servers={{ kafka_consumer_bootstrap_servers }}
 
-bootstrap.servers={% for host in groups['kafka-nodes'] -%}
-{{ hostvars[host]['inventory_hostname'] }}:9092{% if not loop.last %},{% endif %}
+bootstrap.servers={% for item in kafka_servers -%}
+{{ item.host }}:9092{% if not loop.last %},{% endif %}
 {%- endfor %}
 
 
-zookeeper.connect={% for host in groups['zookeeper-nodes'] -%}
-{{ hostvars[host]['inventory_hostname'] }}:2181{% if not loop.last %},{% endif %}
+zookeeper.connect={% for item in zookeeper_servers -%}
+{{ item.host }}:2181{% if not loop.last %},{% endif %}
 {%- endfor %}
 
 
