@@ -24,7 +24,7 @@
 
 
 bootstrap.servers={% for item in kafka_servers -%}
-{{ item.host }}:9092{% if not loop.last %},{% endif %}
+{{ item.host }}:{{ kafka_listener_port }}{% if not loop.last %},{% endif %}
 {%- endfor %}
 
 

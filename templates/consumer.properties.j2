@@ -21,12 +21,12 @@
 #bootstrap.servers={{ kafka_consumer_bootstrap_servers }}
 
 bootstrap.servers={% for item in kafka_servers -%}
-{{ item.host }}:9092{% if not loop.last %},{% endif %}
+{{ item.host }}:{{ kafka_listener_port }}{% if not loop.last %},{% endif %}
 {%- endfor %}
 
 
 zookeeper.connect={% for item in zookeeper_servers -%}
-{{ item.host }}:2181{% if not loop.last %},{% endif %}
+{{ item.host }}:{{ item.port }}{% if not loop.last %},{% endif %}
 {%- endfor %}
 
 
