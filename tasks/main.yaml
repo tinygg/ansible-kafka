@@ -30,10 +30,10 @@
 
 - name: Cleanup required directories
   file:
-    path： '{{ item }}'
+    path: '{{ item }}'
     state: absent
   with_items:
-    - '{{ kafka_root_dir }}'
+    - '{{ kafka_install_dir }}'
     - '{{ kafka_log_dirs }}'
   tags:
     - kafka_cleanup
