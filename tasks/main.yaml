@@ -30,7 +30,7 @@
 
 - name: Creating required directories
   file:
-    path: 
+    path: {{ item }}
     state: directory
     group: '{{ kafka_group }}'
     owner: '{{ kafka_user }}'
