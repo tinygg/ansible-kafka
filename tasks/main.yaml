@@ -35,6 +35,7 @@
   with_items:
     - '{{ kafka_install_dir }}'
     - '{{ kafka_log_dirs }}'
+    - '{{ kafka_dir }}'
   tags:
     - kafka_cleanup
 
