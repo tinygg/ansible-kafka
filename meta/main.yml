@@ -1,6 +1,6 @@
 ---
 dependencies:
-  -  tinygg.zookeeper
+  - "tinygg.ansible_zookeeper"
 
 galaxy_info:
   author: tinygg
