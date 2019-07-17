@@ -1,6 +1,6 @@
 ---
 dependencies:
-  -tinygg.zookeeper
+  -  tinygg.zookeeper
 
 galaxy_info:
   author: tinygg
