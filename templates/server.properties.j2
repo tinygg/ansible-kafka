@@ -45,14 +45,21 @@ default.replication.factor={{ kafka_default_replication_factor }}
 #   EXAMPLE:
 #     listeners = PLAINTEXT://your.host.name:9092
 #listeners=PLAINTEXT://:9092
-listeners={{ kafka_listener_protocol }}://{{ kafka_listener_hostname }}:{{ kafka_listener_port }}
-#listeners={{ kafka_listener_protocol }}://{{ ansible_fqdn }}:{{ kafka_listener_port }}
+{% for item in kafka_servers%}
+{% if item.host == hostvars[inventory_hostname]['ansible_ssh_host']%}
+listeners={{ kafka_listener_protocol }}://{{item.host}}:{{ kafka_listener_port }}
+{% endif %}
+{% endfor %}
 
 # Hostname and port the broker will advertise to producers and consumers. If not set,
 # it uses the value for "listeners" if configured.  Otherwise, it will use the value
 # returned from java.net.InetAddress.getCanonicalHostName().
 #advertised.listeners=PLAINTEXT://your.host.name:9092
-advertised.listeners={{ kafka_advertised_listener_protocol }}://{{ ansible_fqdn }}:{{ kafka_advertised_listener_port }}
+{% for item in kafka_servers%}
+{% if item.host == hostvars[inventory_hostname]['ansible_ssh_host']%}
+advertised.listeners={{ kafka_advertised_listener_protocol }}://{{item.host}}:{{ kafka_advertised_listener_port }}
+{% endif %}
+{% endfor %}
 
 # Maps listener names to security protocols, the default is for them to be the same. See the config documentation for more details
 #listener.security.protocol.map=PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
