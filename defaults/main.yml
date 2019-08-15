@@ -16,7 +16,7 @@ kafka_root_dir: '/usr/lib/kafka'
 kafka_install_dir: '{{ kafka_root_dir }}/kafka_{{ kafka_version_spark_prefix }}-{{ kafka_version }}'
 kafka_dir: '{{ kafka_root_dir }}/kafka'
 # A comma seperated list of directories under which to store log files
-kafka_log_dirs: '{{ kafka_install_dir }}/logs'
+kafka_log_dirs: '/home/{{ kafka_user }}/data'
 
 ############################# Server #############################
 
